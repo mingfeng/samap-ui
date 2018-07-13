@@ -5,12 +5,16 @@ import { AppComponent } from './app.component';
 @Component({selector: 'app-header', template: ''})
 class HeaderStubComponent {}
 
+@Component({selector: 'app-map', template: ''})
+class MapStubComponent { }
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        HeaderStubComponent
+        HeaderStubComponent,
+        MapStubComponent
       ],
     }).compileComponents();
   }));
