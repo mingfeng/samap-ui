@@ -1,3 +1,6 @@
+import { config } from './config.prod';
+
 export const environment = {
-  production: true
+  production: true,
+  mapToken: config.mapToken
 };

@@ -37,3 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Configs that shoud be kept secret from repo
+src/environments/config.ts
+src/environments/config.prod.ts
