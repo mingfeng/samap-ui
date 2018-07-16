@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import * as L from 'leaflet';
+import * as geojson from 'geojson';
 
 import { environment } from '../environments/environment';
+import { RestService } from './rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
   private map: L.Map;
+  private serviceArea: L.GeoJSON<L.Polygon>;
 
-  constructor() { }
+  constructor(private rest: RestService) { }
 
   initialize(mapId: string) {
     this.map = L.map(mapId).setView([60.170126, 24.938742], 15);
@@ -21,5 +24,17 @@ export class MapService {
       id: 'mapbox.streets',
       accessToken: environment.mapToken
     }).addTo(this.map);
+
+    this.map.on('click', (e: L.LeafletMouseEvent) => this.drawServiceArea(e.latlng));
+  }
+
+  private drawServiceArea(latlng: L.LatLng) {
+    if (this.serviceArea) {
+      this.serviceArea.remove();
+    }
+    this.rest.getServiceArea(latlng.lng, latlng.lat, 10000, 'EPSG:4326')
+      .subscribe((serviceArea: geojson.Polygon) => {
+        this.serviceArea = L.geoJSON(serviceArea).addTo(this.map);
+      });
   }
 }

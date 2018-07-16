@@ -5,7 +5,8 @@ import { config } from './config';
 
 export const environment = {
   production: false,
-  mapToken: config.mapToken
+  mapToken: config.mapToken,
+  apiUrl: config.apiUrl
 };
 
 /*
