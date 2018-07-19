@@ -4,6 +4,7 @@ import * as geojson from 'geojson';
 
 import { environment } from '../environments/environment';
 import { RestService } from './rest.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class MapService {
   private map: L.Map;
   private serviceArea: L.GeoJSON<L.Polygon>;
 
-  constructor(private rest: RestService) { }
+  constructor(
+    private rest: RestService,
+    private storage: StorageService
+  ) { }
 
   initialize(mapId: string) {
     this.map = L.map(mapId).setView([60.170126, 24.938742], 15);
@@ -32,7 +36,7 @@ export class MapService {
     if (this.serviceArea) {
       this.serviceArea.remove();
     }
-    this.rest.getServiceArea(latlng.lng, latlng.lat, 10000, 'EPSG:4326')
+    this.rest.getServiceArea(latlng.lng, latlng.lat, this.storage.settings.distance, 'EPSG:4326')
       .subscribe((serviceArea: geojson.Polygon) => {
         this.serviceArea = L.geoJSON(serviceArea).addTo(this.map);
       });
