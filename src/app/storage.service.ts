@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Settings } from './interfaces/settings';
 
-
-const DEFAULT_DISTANCE = 1000;
+export const DEFAULT_DISTANCE = 1000;
 
 @Injectable({
   providedIn: 'root'
