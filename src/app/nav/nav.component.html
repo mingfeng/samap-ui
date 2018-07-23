@@ -19,7 +19,11 @@
 
         <section>
           <mat-form-field class="settings-item">
-            <input matInput type="number" placeholder="Travel time">
+            <input matInput [formControl]="travelTimeControl" type="number" min="10" max="120" placeholder="Travel time">
+            <span matSuffix>min</span>
+            <mat-error *ngIf="travelTimeControl.errors">
+              Please enter a value between 10 and 120
+            </mat-error>
           </mat-form-field>
         </section>
       </mat-card-content>

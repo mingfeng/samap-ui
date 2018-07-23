@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +7,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-  settingsForm: FormGroup;
+  travelTimeControl = new FormControl('', [
+    Validators.required,
+    Validators.min(10),
+    Validators.max(120)
+  ]);
 
   constructor() {}
 
