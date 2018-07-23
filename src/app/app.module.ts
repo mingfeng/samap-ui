@@ -13,7 +13,9 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSidenavModule,
-  MatListModule
+  MatListModule,
+  MatButtonToggleModule,
+  MatCardModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -49,6 +51,8 @@ import { NavComponent } from './nav/nav.component';
     LayoutModule,
     MatSidenavModule,
     MatListModule,
+    MatButtonToggleModule,
+    MatCardModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

@@ -1,24 +1,33 @@
 <mat-sidenav-container fullscreen class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport="true"
-    [attr.role]="dialog"
-    [mode]="over">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="dialog" [mode]="over">
+    <mat-toolbar color="primary">Settings</mat-toolbar>
+    <mat-card class="settings-content">
+      <mat-card-content>
+        <section>
+          <mat-button-toggle-group class="travel-mode-toggle-group settings-item">
+            <mat-button-toggle class="travel-mode-toggle" value="car">
+              <mat-icon>directions_car</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle class="travel-mode-toggle" value="bike">
+              <mat-icon>directions_bike</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle class="travel-mode-toggle" value="walk">
+              <mat-icon>directions_walk</mat-icon>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </section>
+
+        <section>
+          <mat-form-field class="settings-item">
+            <input matInput type="number" placeholder="Travel time">
+          </mat-form-field>
+        </section>
+      </mat-card-content>
+    </mat-card>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content">
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>samap-ui</span>

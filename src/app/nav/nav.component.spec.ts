@@ -5,7 +5,11 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatSidenavModule,
-  MatListModule
+  MatListModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule
 } from '@angular/material';
 
 import { NavComponent } from './nav.component';
@@ -24,6 +28,10 @@ describe('NavComponent', () => {
         MatToolbarModule,
         MatIconModule,
         MatListModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatInputModule,
+        MatFormFieldModule,
         BrowserAnimationsModule
       ],
       declarations: [

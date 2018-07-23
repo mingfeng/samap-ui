@@ -7,3 +7,11 @@ body {
   width: 100%;
   height: 100%;
 }
+
+/* Cannot style the encapsulated button element
+ * of mat-button-toggle diretive in component's
+ * style, thus put it in global styles
+*/
+.travel-mode-toggle > button {
+  width: 100%;
+}
