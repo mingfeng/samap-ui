@@ -18,7 +18,7 @@ const SPEED_MAPPING = {
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-  travelTimeControl = new FormControl('', [
+  travelTimeControl = new FormControl(10, [
     Validators.required,
     Validators.min(10),
     Validators.max(120)
@@ -29,7 +29,15 @@ export class NavComponent {
   constructor() {}
 
   get travelSpeed() {
-    return SPEED_MAPPING[this.currentTravelMode];
+    return SPEED_MAPPING[this.currentTravelMode] * 1000 / 3600;
+  }
+
+  get travelTime() {
+    return this.travelTimeControl.valid ? this.travelTimeControl.value * 60 : 0;
+  }
+
+  get travelDistance() {
+    return this.travelSpeed * this.travelTime;
   }
 
   changeTravelMode(mode: TravelMode) {
