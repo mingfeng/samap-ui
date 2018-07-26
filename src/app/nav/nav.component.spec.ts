@@ -6,8 +6,6 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatSidenavModule,
-  MatListModule,
-  MatButtonToggleModule,
   MatCardModule,
   MatInputModule,
   MatFormFieldModule
@@ -17,6 +15,9 @@ import { NavComponent } from './nav.component';
 
 @Component({selector: 'app-map', template: ''})
 class MapStubComponent {}
+
+@Component({selector: 'app-settings', template: ''})
+class SettingsStubComponent {}
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -28,17 +29,15 @@ describe('NavComponent', () => {
         MatSidenavModule,
         MatToolbarModule,
         MatIconModule,
-        MatListModule,
-        MatButtonToggleModule,
         MatCardModule,
-        MatInputModule,
         MatFormFieldModule,
         ReactiveFormsModule,
         BrowserAnimationsModule
       ],
       declarations: [
         NavComponent,
-        MapStubComponent
+        MapStubComponent,
+        SettingsStubComponent
       ]
     })
     .compileComponents();

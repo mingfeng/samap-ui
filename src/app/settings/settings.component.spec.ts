@@ -1,7 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule, MatFormFieldModule, MatInputModule, MatDialogRef } from '@angular/material';
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
+  MatListModule,
+  MatButtonToggleModule
+} from '@angular/material';
 
 import { SettingsComponent } from './settings.component';
 
@@ -12,16 +18,15 @@ describe('SettingsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
+        MatIconModule,
+        MatListModule,
+        MatButtonToggleModule,
         NoopAnimationsModule,
         ReactiveFormsModule
       ],
       declarations: [ SettingsComponent ],
-      providers: [
-        { provide: MatDialogRef, useValue: {}}
-      ]
     })
     .compileComponents();
   }));

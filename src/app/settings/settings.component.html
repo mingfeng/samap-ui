@@ -1,12 +1,23 @@
-<h2 mat-dialog-title>Settgings</h2>
-<form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
-  <mat-dialog-content>
-    <mat-form-field>
-      <input matInput type="number" placeholder="Distance (m)" formControlName="distance">
-    </mat-form-field>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close color="secondary">Cancel</button>
-    <button type="submit" mat-button color="primary" [disabled]="settingsForm.pristine">Save</button>
-  </mat-dialog-actions>
-</form>
+<section>
+  <mat-button-toggle-group class="travel-mode-toggle-group settings-item" [value]="currentTravelMode" (change)="changeTravelMode($event.value)">
+    <mat-button-toggle class="travel-mode-toggle" value="car">
+      <mat-icon>directions_car</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle class="travel-mode-toggle" value="bike">
+      <mat-icon>directions_bike</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle class="travel-mode-toggle" value="walk">
+      <mat-icon>directions_walk</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<section>
+  <mat-form-field class="settings-item">
+    <input matInput type="number" min="10" max="120" placeholder="Travel time" [formControl]="travelTimeControl">
+    <span matSuffix>min</span>
+    <mat-error *ngIf="travelTimeControl.errors">
+      Please enter a value between 10 and 120
+    </mat-error>
+  </mat-form-field>
+</section>

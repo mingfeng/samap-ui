@@ -1,0 +1,13 @@
+.travel-mode-toggle-group {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.travel-mode-toggle {
+  flex: 1;
+}
+
+.settings-item {
+  width: 100%;
+}

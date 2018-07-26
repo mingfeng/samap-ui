@@ -3,29 +3,7 @@
     <mat-toolbar color="primary">Settings</mat-toolbar>
     <mat-card class="settings-content">
       <mat-card-content>
-        <section>
-          <mat-button-toggle-group class="travel-mode-toggle-group settings-item" [value]="currentTravelMode" (change)="changeTravelMode($event.value)">
-            <mat-button-toggle class="travel-mode-toggle" value="car">
-              <mat-icon>directions_car</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle class="travel-mode-toggle" value="bike">
-              <mat-icon>directions_bike</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle class="travel-mode-toggle" value="walk">
-              <mat-icon>directions_walk</mat-icon>
-            </mat-button-toggle>
-          </mat-button-toggle-group>
-        </section>
-
-        <section>
-          <mat-form-field class="settings-item">
-            <input matInput type="number" min="10" max="120" placeholder="Travel time" [formControl]="travelTimeControl">
-            <span matSuffix>min</span>
-            <mat-error *ngIf="travelTimeControl.errors">
-              Please enter a value between 10 and 120
-            </mat-error>
-          </mat-form-field>
-        </section>
+        <app-settings></app-settings>
       </mat-card-content>
     </mat-card>
   </mat-sidenav>
