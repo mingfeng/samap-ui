@@ -36,7 +36,7 @@ export class MapService {
     if (this.serviceArea) {
       this.serviceArea.remove();
     }
-    this.rest.getServiceArea(latlng.lng, latlng.lat, this.storage.settings.distance, 'EPSG:4326')
+    this.rest.getServiceArea(latlng.lng, latlng.lat, this.storage.travelDistance, 'EPSG:4326')
       .subscribe((serviceArea: geojson.Polygon) => {
         this.serviceArea = L.geoJSON(serviceArea).addTo(this.map);
       });

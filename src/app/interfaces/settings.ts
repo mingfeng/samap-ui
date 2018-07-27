@@ -1,3 +1,6 @@
+import { TravelMode } from '../enums';
+
 export interface Settings {
-  distance: number;
+  travelMode: TravelMode;
+  travelTime: number;
 }
