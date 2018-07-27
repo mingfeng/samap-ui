@@ -18,9 +18,12 @@ export class SettingsComponent {
   ]);
 
   currentTravelMode = TravelMode.CAR;
+  currentTravelTime = 10;
 
   constructor(private storageService: StorageService) {
     this.travelTimeControl.valueChanges.subscribe(value => this.updateSettings());
+    this.currentTravelMode = this.storageService.settings.travelMode;
+    this.travelTimeControl.setValue(this.storageService.settings.travelTime);
   }
 
   changeTravelMode(mode: TravelMode) {
