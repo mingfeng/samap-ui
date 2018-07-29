@@ -1,4 +1,14 @@
 <section>
+  <h3>Basemaps</h3>
+  <mat-radio-group class="basemap-radio-group" [value]="currentBasemap" (change)="changeBasemap($event.value)">
+    <mat-radio-button class="basemap-radio-button" *ngFor="let basemap of basemaps" [value]="basemap[0]">
+      {{basemap[1]}}
+    </mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <h3>Travel by</h3>
   <mat-button-toggle-group class="travel-mode-toggle-group settings-item" [value]="currentTravelMode" (change)="changeTravelMode($event.value)">
     <mat-button-toggle class="travel-mode-toggle" value="car">
       <mat-icon>directions_car</mat-icon>

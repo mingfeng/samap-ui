@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Settings } from './interfaces/settings';
 import { TravelMode } from './enums';
+import { DEFAULT_BASEMAP } from './constants';
 
 export const DEFAULT_TRAVEL_MODE = TravelMode.CAR;
 export const DEFAULT_TRAVEL_TIME = 10;
@@ -26,6 +27,7 @@ export class StorageService {
   get settings(): Settings {
     if (!this._settings) {
       this._settings = {
+        basemap: sessionStorage.getItem('settings-basemap') || DEFAULT_BASEMAP,
         travelMode: <TravelMode>sessionStorage.getItem('settings-travelMode') || DEFAULT_TRAVEL_MODE,
         travelTime: parseInt(sessionStorage.getItem('settings-travelTime'), 10) || DEFAULT_TRAVEL_TIME
       };
@@ -35,6 +37,7 @@ export class StorageService {
 
   set settings(settings: Settings) {
     this._settings = settings;
+    sessionStorage.setItem('settings-basemap', settings.basemap);
     sessionStorage.setItem('settings-travelMode', settings.travelMode);
     sessionStorage.setItem('settings-travelTime', settings.travelTime.toString());
   }

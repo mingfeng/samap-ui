@@ -1,3 +1,12 @@
+.basemap-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.basemap-radio-button {
+  margin: 5px;
+}
+
 .travel-mode-toggle-group {
   display: flex;
   flex-direction: row;
