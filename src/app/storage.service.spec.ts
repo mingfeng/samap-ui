@@ -5,7 +5,7 @@ import { TravelMode } from './enums';
 
 const data = {};
 
-const mockLocalStorage = {
+const mockSessionStorage = {
   getItem: (key) => {
     return data[key] || null;
   },
@@ -21,8 +21,8 @@ describe('StorageService', () => {
       providers: [StorageService]
     });
 
-    spyOn(localStorage, 'getItem').and.callFake(mockLocalStorage.getItem);
-    spyOn(localStorage, 'setItem').and.callFake(mockLocalStorage.setItem);
+    spyOn(sessionStorage, 'getItem').and.callFake(mockSessionStorage.getItem);
+    spyOn(sessionStorage, 'setItem').and.callFake(mockSessionStorage.setItem);
   });
 
   it('should be created', inject([StorageService], (service: StorageService) => {
@@ -37,8 +37,8 @@ describe('StorageService', () => {
   }));
 
   it('should return saved settings if available', inject([StorageService], (service: StorageService) => {
-    localStorage.setItem('settings-travelMode', 'car');
-    localStorage.setItem('settings-travelTime', '12345');
+    sessionStorage.setItem('settings-travelMode', 'car');
+    sessionStorage.setItem('settings-travelTime', '12345');
     expect(service.settings).toEqual({
       travelMode: TravelMode.CAR,
       travelTime: 12345
@@ -50,8 +50,8 @@ describe('StorageService', () => {
       travelMode: TravelMode.BIKE,
       travelTime: 54321
     };
-    const savedTravelMode = localStorage.getItem('settings-travelMode');
-    const savedTravelTime = localStorage.getItem('settings-travelTime');
+    const savedTravelMode = sessionStorage.getItem('settings-travelMode');
+    const savedTravelTime = sessionStorage.getItem('settings-travelTime');
     expect(savedTravelMode).toEqual('bike');
     expect(savedTravelTime).toEqual('54321');
   }));

@@ -26,8 +26,8 @@ export class StorageService {
   get settings(): Settings {
     if (!this._settings) {
       this._settings = {
-        travelMode: <TravelMode>localStorage.getItem('settings-travelMode') || DEFAULT_TRAVEL_MODE,
-        travelTime: parseInt(localStorage.getItem('settings-travelTime'), 10) || DEFAULT_TRAVEL_TIME
+        travelMode: <TravelMode>sessionStorage.getItem('settings-travelMode') || DEFAULT_TRAVEL_MODE,
+        travelTime: parseInt(sessionStorage.getItem('settings-travelTime'), 10) || DEFAULT_TRAVEL_TIME
       };
     }
     return this._settings;
@@ -35,8 +35,8 @@ export class StorageService {
 
   set settings(settings: Settings) {
     this._settings = settings;
-    localStorage.setItem('settings-travelMode', settings.travelMode);
-    localStorage.setItem('settings-travelTime', settings.travelTime.toString());
+    sessionStorage.setItem('settings-travelMode', settings.travelMode);
+    sessionStorage.setItem('settings-travelTime', settings.travelTime.toString());
   }
 
   get travelSpeed(): number {
