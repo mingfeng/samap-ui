@@ -13,7 +13,6 @@ import { DEFAULT_BASEMAP } from './constants';
 export class MapService {
   private basemaps: {[id: string]: L.TileLayer} = {};
   private map: L.Map;
-  private serviceArea: L.GeoJSON<L.Polygon>;
   private currentBasemap: string;
 
   constructor(
@@ -54,12 +53,12 @@ export class MapService {
   }
 
   private drawServiceArea(latlng: L.LatLng) {
-    if (this.serviceArea) {
-      this.serviceArea.remove();
-    }
     this.restService.getServiceArea(latlng.lng, latlng.lat, this.storageService.travelDistance, 'EPSG:4326')
       .subscribe((serviceArea: geojson.Polygon) => {
-        this.serviceArea = L.geoJSON(serviceArea).addTo(this.map);
+        L.marker(latlng, {
+          icon: L.icon({ iconUrl: 'assets/images/place.svg' })
+        }).addTo(this.map);
+        L.geoJSON(serviceArea).addTo(this.map);
       });
   }
 }
