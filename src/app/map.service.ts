@@ -17,8 +17,8 @@ export class MapService {
   private currentBasemap: string;
 
   constructor(
-    private rest: RestService,
-    private storage: StorageService
+    private restService: RestService,
+    private storageService: StorageService
   ) { }
 
   initialize(mapId: string) {
@@ -57,7 +57,7 @@ export class MapService {
     if (this.serviceArea) {
       this.serviceArea.remove();
     }
-    this.rest.getServiceArea(latlng.lng, latlng.lat, this.storage.travelDistance, 'EPSG:4326')
+    this.restService.getServiceArea(latlng.lng, latlng.lat, this.storageService.travelDistance, 'EPSG:4326')
       .subscribe((serviceArea: geojson.Polygon) => {
         this.serviceArea = L.geoJSON(serviceArea).addTo(this.map);
       });
