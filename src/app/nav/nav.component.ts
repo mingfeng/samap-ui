@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MapService } from '../map.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
-  constructor() {}
+  constructor(private mapService: MapService) {}
+
+  clearMap() {
+    this.mapService.clearMap();
+  }
 }

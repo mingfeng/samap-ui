@@ -7,11 +7,12 @@ import {
   MatIconModule,
   MatSidenavModule,
   MatCardModule,
-  MatInputModule,
   MatFormFieldModule
 } from '@angular/material';
 
 import { NavComponent } from './nav.component';
+import { MapService } from '../map.service';
+import { O_TRUNC } from 'constants';
 
 @Component({selector: 'app-map', template: ''})
 class MapStubComponent {}
@@ -22,8 +23,11 @@ class SettingsStubComponent {}
 describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
+  let mapServiceSpy: jasmine.SpyObj<MapService>;
 
   beforeEach(fakeAsync(() => {
+    mapServiceSpy = jasmine.createSpyObj('MapService', ['clearMap']);
+
     TestBed.configureTestingModule({
       imports: [
         MatSidenavModule,
@@ -38,6 +42,9 @@ describe('NavComponent', () => {
         NavComponent,
         MapStubComponent,
         SettingsStubComponent
+      ],
+      providers: [
+        { provide: MapService, useValue: mapServiceSpy }
       ]
     })
     .compileComponents();
@@ -49,5 +56,10 @@ describe('NavComponent', () => {
 
   it('should compile', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call spy map service clearMap', () => {
+    component.clearMap();
+    expect(mapServiceSpy.clearMap).toHaveBeenCalled();
   });
 });

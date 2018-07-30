@@ -15,6 +15,9 @@ export class MapService {
   private map: L.Map;
   private currentBasemap: string;
 
+  private markers: Array<L.Marker> = [];
+  private serviceAreas: Array<L.GeoJSON<L.Polygon>> = [];
+
   constructor(
     private restService: RestService,
     private storageService: StorageService
@@ -41,6 +44,11 @@ export class MapService {
     return this.currentBasemap;
   }
 
+  clearMap() {
+    this.markers.forEach(marker => this.map.removeLayer(marker));
+    this.serviceAreas.forEach(serviceArea => this.map.removeLayer(serviceArea));
+  }
+
   private createBasemap(basemap: string): L.TileLayer {
     return L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -55,10 +63,12 @@ export class MapService {
   private drawServiceArea(latlng: L.LatLng) {
     this.restService.getServiceArea(latlng.lng, latlng.lat, this.storageService.travelDistance, 'EPSG:4326')
       .subscribe((serviceArea: geojson.Polygon) => {
-        L.marker(latlng, {
+        const marker = L.marker(latlng, {
           icon: L.icon({ iconUrl: 'assets/images/place.svg' })
         }).addTo(this.map);
-        L.geoJSON(serviceArea).addTo(this.map);
+        const geojsonArea = L.geoJSON(serviceArea).addTo(this.map);
+        this.markers.push(marker);
+        this.serviceAreas.push(geojsonArea);
       });
   }
 }
