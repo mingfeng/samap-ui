@@ -63,9 +63,12 @@ export class MapService {
   private drawServiceArea(latlng: L.LatLng) {
     this.restService.getServiceArea(latlng.lng, latlng.lat, this.storageService.travelDistance, 'EPSG:4326')
       .subscribe((serviceArea: geojson.Polygon) => {
-        const marker = L.marker(latlng, {
-          icon: L.icon({ iconUrl: 'assets/images/place.svg' })
-        }).addTo(this.map);
+        const icon = L.icon({
+          iconUrl: 'assets/images/place.svg',
+          iconSize: [24, 24],
+          iconAnchor: [12, 24]
+        });
+        const marker = L.marker(latlng, {icon}).addTo(this.map);
         const geojsonArea = L.geoJSON(serviceArea).addTo(this.map);
         this.markers.push(marker);
         this.serviceAreas.push(geojsonArea);
