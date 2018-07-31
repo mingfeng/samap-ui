@@ -69,6 +69,9 @@ export class MapService {
           iconAnchor: [12, 24]
         });
         const marker = L.marker(latlng, {icon}).addTo(this.map);
+        marker.on('click', () => {
+          this.drawServiceArea(marker.getLatLng());
+        });
         const geojsonArea = L.geoJSON(serviceArea).addTo(this.map);
         this.markers.push(marker);
         this.serviceAreas.push(geojsonArea);
