@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Settings } from './interfaces/settings';
 import { TravelMode } from './enums';
 import { DEFAULT_BASEMAP } from './constants';
 
@@ -19,38 +18,16 @@ const SPEED_MAPPING = {
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
-  private _settings: Settings;
+export class SettingService {
+  basemap = DEFAULT_BASEMAP;
+  travelMode = DEFAULT_TRAVEL_MODE;
+  travelTime = DEFAULT_TRAVEL_TIME;
 
   constructor() { }
 
-  get settings(): Settings {
-    if (!this._settings) {
-      this._settings = {
-        basemap: sessionStorage.getItem('settings-basemap') || DEFAULT_BASEMAP,
-        travelMode: <TravelMode>sessionStorage.getItem('settings-travelMode') || DEFAULT_TRAVEL_MODE,
-        travelTime: parseInt(sessionStorage.getItem('settings-travelTime'), 10) || DEFAULT_TRAVEL_TIME
-      };
-    }
-    return this._settings;
-  }
-
-  set settings(settings: Settings) {
-    this._settings = settings;
-    sessionStorage.setItem('settings-basemap', settings.basemap);
-    sessionStorage.setItem('settings-travelMode', settings.travelMode);
-    sessionStorage.setItem('settings-travelTime', settings.travelTime.toString());
-  }
-
-  get travelSpeed(): number {
-    return SPEED_MAPPING[this.settings.travelMode] * 1000 / 3600;
-  }
-
-  get travelTime(): number {
-    return this.settings.travelTime * 60;
-  }
-
   get travelDistance(): number {
-    return Math.round(this.travelSpeed * this.travelTime);
+    const travelSpeed = SPEED_MAPPING[this.travelMode] * 1000 / 3600;
+    const travelTimeInSeconds = this.travelTime * 60;
+    return Math.round(travelSpeed * travelTimeInSeconds);
   }
 }

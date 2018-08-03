@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { TravelMode } from '../enums';
-import { StorageService } from '../storage.service';
-import { Settings } from '../interfaces/settings';
+import { SettingService } from '../storage.service';
 import { BASEMAPS, DEFAULT_BASEMAP } from '../constants';
 import { MapService } from '../map.service';
 
@@ -26,13 +25,13 @@ export class SettingsComponent {
   currentColor = '#3388FF';
 
   constructor(
-    private storageService: StorageService,
+    private storageService: SettingService,
     private mapService: MapService
   ) {
     this.travelTimeControl.valueChanges.subscribe(value => this.updateSettings());
-    this.travelTimeControl.setValue(this.storageService.settings.travelTime);
-    this.currentBasemap = this.storageService.settings.basemap;
-    this.currentTravelMode = this.storageService.settings.travelMode;
+    this.travelTimeControl.setValue(this.storageService.travelTime);
+    this.currentBasemap = this.storageService.basemap;
+    this.currentTravelMode = this.storageService.travelMode;
   }
 
   changeBasemap(basemap: string) {
@@ -51,11 +50,6 @@ export class SettingsComponent {
   }
 
   updateSettings() {
-    const settings: Settings = {
-      basemap: this.currentBasemap,
-      travelMode: this.currentTravelMode,
-      travelTime: this.travelTimeControl.valid ? this.travelTimeControl.value : 0
-    };
-    this.storageService.settings = settings;
+
   }
 }

@@ -4,7 +4,7 @@ import * as geojson from 'geojson';
 
 import { environment } from '../environments/environment';
 import { RestService } from './rest.service';
-import { StorageService } from './storage.service';
+import { SettingService } from './storage.service';
 import { DEFAULT_BASEMAP } from './constants';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class MapService {
 
   constructor(
     private restService: RestService,
-    private storageService: StorageService
+    private storageService: SettingService
   ) { }
 
   initialize(mapId: string) {
