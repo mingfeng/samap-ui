@@ -4,7 +4,7 @@ import * as geojson from 'geojson';
 
 import { environment } from '../environments/environment';
 import { RestService } from './rest.service';
-import { SettingService } from './storage.service';
+import { SettingService } from './setting.service';
 import { DEFAULT_BASEMAP } from './constants';
 
 @Injectable({

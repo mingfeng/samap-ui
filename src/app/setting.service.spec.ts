@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { SettingService } from './storage.service';
+import { SettingService } from './setting.service';
 import { TravelMode } from './enums';
 
 describe('SettingService', () => {
