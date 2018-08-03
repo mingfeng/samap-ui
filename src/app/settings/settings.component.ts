@@ -19,37 +19,57 @@ export class SettingsComponent {
   ]);
 
   basemaps = Object.entries(BASEMAPS);
-  currentBasemap = DEFAULT_BASEMAP;
-  currentTravelMode = TravelMode.CAR;
-  currentTravelTime = 10;
-  currentColor = '#3388FF';
 
   constructor(
-    private storageService: SettingService,
+    private settingService: SettingService,
     private mapService: MapService
   ) {
-    this.travelTimeControl.valueChanges.subscribe(value => this.updateSettings());
-    this.travelTimeControl.setValue(this.storageService.travelTime);
-    this.currentBasemap = this.storageService.basemap;
-    this.currentTravelMode = this.storageService.travelMode;
+    this.travelTimeControl.valueChanges.subscribe(travelTime => this.travelTime = travelTime);
+    this.travelTimeControl.setValue(this.travelTime);
+  }
+
+  get basemap(): string {
+    return this.settingService.basemap;
+  }
+
+  set basemap(basemap: string) {
+    this.settingService.basemap = basemap;
+    this.mapService.activateBasemap(basemap);
+  }
+
+  get travelMode(): TravelMode {
+    return this.settingService.travelMode;
+  }
+
+  set travelMode(mode: TravelMode) {
+    this.settingService.travelMode = mode;
+  }
+
+  get travelTime(): number {
+    return this.settingService.travelTime;
+  }
+
+  set travelTime(time: number) {
+    this.settingService.travelTime = time;
+  }
+
+  get serviceAreaColor(): string {
+    return this.settingService.serviceAreaColor;
+  }
+
+  set serviceAreaColor(color: string) {
+    this.settingService.serviceAreaColor = color;
   }
 
   changeBasemap(basemap: string) {
-    this.currentBasemap = basemap;
-    this.mapService.activateBasemap(basemap);
-    this.updateSettings();
+    this.basemap = basemap;
   }
 
   changeTravelMode(mode: TravelMode) {
-    this.currentTravelMode = mode;
-    this.updateSettings();
+    this.travelMode = mode;
   }
 
-  changeColor(color: string) {
-    this.currentColor = color;
-  }
-
-  updateSettings() {
-
+  changeServiceAreaColor(color: string) {
+    this.serviceAreaColor = color;
   }
 }
