@@ -20,7 +20,7 @@ export class MapService {
 
   constructor(
     private restService: RestService,
-    private storageService: SettingService
+    private settingService: SettingService
   ) { }
 
   initialize(mapId: string) {
@@ -61,7 +61,7 @@ export class MapService {
   }
 
   private drawServiceArea(latlng: L.LatLng) {
-    this.restService.getServiceArea(latlng.lng, latlng.lat, this.storageService.travelDistance, 'EPSG:4326')
+    this.restService.getServiceArea(latlng.lng, latlng.lat, this.settingService.travelDistance, 'EPSG:4326')
       .subscribe((serviceArea: geojson.Polygon) => {
         const icon = L.icon({
           iconUrl: 'assets/images/place.svg',
@@ -72,7 +72,11 @@ export class MapService {
         marker.on('click', () => {
           this.drawServiceArea(marker.getLatLng());
         });
-        const geojsonArea = L.geoJSON(serviceArea).addTo(this.map);
+        const geojsonArea = L.geoJSON(serviceArea, {
+          style: () => {
+            return { color: this.settingService.serviceAreaColor };
+          }
+        }).addTo(this.map);
         this.markers.push(marker);
         this.serviceAreas.push(geojsonArea);
       });
