@@ -17,6 +17,7 @@ import {
   MatButtonToggleModule,
   MatCardModule
 } from '@angular/material';
+import { MccColorPickerModule } from 'material-community-components';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -53,6 +54,7 @@ import { NavComponent } from './nav/nav.component';
     MatListModule,
     MatButtonToggleModule,
     MatCardModule,
+    MccColorPickerModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

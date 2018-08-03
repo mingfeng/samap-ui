@@ -31,3 +31,14 @@
     </mat-error>
   </mat-form-field>
 </section>
+
+<section>
+  <h3>Color</h3>
+  <mcc-color-picker
+    [selectedColor]="currentColor"
+    usedSizeColors="8"
+    hideButtons
+    hideTransparentUsedColors
+    (change)="changeColor($event)"
+  ></mcc-color-picker>
+</section>

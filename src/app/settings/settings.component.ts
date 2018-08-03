@@ -23,6 +23,7 @@ export class SettingsComponent {
   currentBasemap = DEFAULT_BASEMAP;
   currentTravelMode = TravelMode.CAR;
   currentTravelTime = 10;
+  currentColor = '#3388FF';
 
   constructor(
     private storageService: StorageService,
@@ -43,6 +44,10 @@ export class SettingsComponent {
   changeTravelMode(mode: TravelMode) {
     this.currentTravelMode = mode;
     this.updateSettings();
+  }
+
+  changeColor(color: string) {
+    this.currentColor = color;
   }
 
   updateSettings() {

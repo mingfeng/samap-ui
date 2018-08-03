@@ -9,6 +9,7 @@ import {
   MatListModule,
   MatButtonToggleModule
 } from '@angular/material';
+import { MccColorPickerModule } from 'material-community-components';
 
 import { MapService } from '../map.service';
 import { SettingsComponent } from './settings.component';
@@ -29,6 +30,7 @@ describe('SettingsComponent', () => {
         MatListModule,
         MatButtonToggleModule,
         NoopAnimationsModule,
+        MccColorPickerModule,
         ReactiveFormsModule
       ],
       providers: [
