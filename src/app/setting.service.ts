@@ -14,6 +14,7 @@ const SPEED_MAPPING = {
   [TravelMode.BIKE]: BIKE_SPEED_KPH,
   [TravelMode.WALK]: WALK_SPEED_KPH
 };
+const DEFAULT_SERVICE_AREA_COLOR = '#3388FF';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class SettingService {
   basemap = DEFAULT_BASEMAP;
   travelMode = DEFAULT_TRAVEL_MODE;
   travelTime = DEFAULT_TRAVEL_TIME;
+  serviceAreaColor = DEFAULT_SERVICE_AREA_COLOR;
 
   constructor() { }
 
