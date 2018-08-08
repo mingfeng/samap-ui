@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 
 import { TravelMode } from '../enums';
 import { SettingService } from '../setting.service';
-import { BASEMAPS, DEFAULT_BASEMAP } from '../constants';
+import { BASEMAPS } from '../constants';
 import { MapService } from '../map.service';
 
 @Component({
