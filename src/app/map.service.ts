@@ -31,7 +31,7 @@ export class MapService {
 
   initialize(mapId: string) {
     this.map = L.map(mapId).setView([60.170126, 24.938742], 15);
-    this.map.on('click', (e: L.LeafletMouseEvent) => this.drawServiceArea(e.latlng));
+    this.map.on('click', (e: L.LeafletMouseEvent) => this.requestServiceArea(e.latlng));
     this.activateBasemap(DEFAULT_BASEMAP);
   }
 
@@ -66,7 +66,7 @@ export class MapService {
     });
   }
 
-  private drawServiceArea(latlng: L.LatLng) {
+  private requestServiceArea(latlng: L.LatLng) {
     if (this._isRequestingData) {
       return;
     }
@@ -81,7 +81,7 @@ export class MapService {
           });
           const marker = L.marker(latlng, {icon}).addTo(this.map);
           marker.on('click', () => {
-            this.drawServiceArea(marker.getLatLng());
+            this.requestServiceArea(marker.getLatLng());
           });
           const geojsonArea = L.geoJSON(serviceArea, {
             style: () => {
