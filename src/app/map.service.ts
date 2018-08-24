@@ -74,28 +74,36 @@ export class MapService {
     this.restService.getServiceArea(latlng.lng, latlng.lat, this.settingService.travelDistance, 'EPSG:4326')
       .subscribe(
         (serviceArea: geojson.Polygon) => {
-          const icon = L.icon({
-            iconUrl: 'assets/images/place.svg',
-            iconSize: [24, 24],
-            iconAnchor: [12, 24]
-          });
-          const marker = L.marker(latlng, {icon}).addTo(this.map);
-          marker.on('click', () => {
-            this.requestServiceArea(marker.getLatLng());
-          });
-          const geojsonArea = L.geoJSON(serviceArea, {
-            style: () => {
-              return { color: this.settingService.serviceAreaColor };
-            }
-          }).addTo(this.map);
-          this.markers.push(marker);
-          this.serviceAreas.push(geojsonArea);
+          this.createMarker(latlng);
+          this.createServiceArea(serviceArea);
           this._isRequestingData = false;
         },
         (error) => {
-          console.log(error);
+          console.error(error);
           this._isRequestingData = false;
         }
       );
+  }
+
+  private createMarker(latlng: L.LatLng) {
+    const icon = L.icon({
+      iconUrl: 'assets/images/place.svg',
+      iconSize: [24, 24],
+      iconAnchor: [12, 24]
+    });
+    const marker = L.marker(latlng, {icon}).addTo(this.map);
+    marker.on('click', () => {
+      this.requestServiceArea(marker.getLatLng());
+    });
+    this.markers.push(marker);
+  }
+
+  private createServiceArea(area: geojson.Polygon) {
+    const serviceArea = L.geoJSON(area, {
+      style: () => {
+        return { color: this.settingService.serviceAreaColor };
+      }
+    }).addTo(this.map);
+    this.serviceAreas.push(serviceArea);
   }
 }
