@@ -14,4 +14,8 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.mapService.initialize(this.mapId);
   }
+
+  get isRequestingData() {
+    return this.mapService.isRequestingData;
+  }
 }

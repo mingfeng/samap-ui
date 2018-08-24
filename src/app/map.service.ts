@@ -18,10 +18,16 @@ export class MapService {
   private markers: Array<L.Marker> = [];
   private serviceAreas: Array<L.GeoJSON<L.Polygon>> = [];
 
+  private _isRequestingData = false;
+
   constructor(
     private restService: RestService,
     private settingService: SettingService
   ) { }
+
+  get isRequestingData() {
+    return this._isRequestingData;
+  }
 
   initialize(mapId: string) {
     this.map = L.map(mapId).setView([60.170126, 24.938742], 15);
@@ -61,24 +67,35 @@ export class MapService {
   }
 
   private drawServiceArea(latlng: L.LatLng) {
+    if (this._isRequestingData) {
+      return;
+    }
+    this._isRequestingData = true;
     this.restService.getServiceArea(latlng.lng, latlng.lat, this.settingService.travelDistance, 'EPSG:4326')
-      .subscribe((serviceArea: geojson.Polygon) => {
-        const icon = L.icon({
-          iconUrl: 'assets/images/place.svg',
-          iconSize: [24, 24],
-          iconAnchor: [12, 24]
-        });
-        const marker = L.marker(latlng, {icon}).addTo(this.map);
-        marker.on('click', () => {
-          this.drawServiceArea(marker.getLatLng());
-        });
-        const geojsonArea = L.geoJSON(serviceArea, {
-          style: () => {
-            return { color: this.settingService.serviceAreaColor };
-          }
-        }).addTo(this.map);
-        this.markers.push(marker);
-        this.serviceAreas.push(geojsonArea);
-      });
+      .subscribe(
+        (serviceArea: geojson.Polygon) => {
+          const icon = L.icon({
+            iconUrl: 'assets/images/place.svg',
+            iconSize: [24, 24],
+            iconAnchor: [12, 24]
+          });
+          const marker = L.marker(latlng, {icon}).addTo(this.map);
+          marker.on('click', () => {
+            this.drawServiceArea(marker.getLatLng());
+          });
+          const geojsonArea = L.geoJSON(serviceArea, {
+            style: () => {
+              return { color: this.settingService.serviceAreaColor };
+            }
+          }).addTo(this.map);
+          this.markers.push(marker);
+          this.serviceAreas.push(geojsonArea);
+          this._isRequestingData = false;
+        },
+        (error) => {
+          console.log(error);
+          this._isRequestingData = false;
+        }
+      );
   }
 }
