@@ -1,6 +1,6 @@
 {
-  "name": "samap-ui",
-  "short_name": "samap-ui",
+  "name": "Samap",
+  "short_name": "Samap",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
