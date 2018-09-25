@@ -5,4 +5,4 @@ export const BASEMAPS = {
   'mapbox.satellite': 'Satellite'
 };
 
-export const DEFAULT_BASEMAP = 'mapbox.streets';
+export const DEFAULT_BASEMAP = 'mapbox.dark';
