@@ -30,7 +30,7 @@ export class MapService {
   }
 
   initialize(mapId: string) {
-    this.map = L.map(mapId, {attributionControl: false}).setView([60.170126, 24.938742], 15);
+    this.map = L.map(mapId, {attributionControl: false}).setView([60.170126, 24.938742], 12);
     this.map.on('click', (e: L.LeafletMouseEvent) => this.requestServiceArea(e.latlng));
     this.activateBasemap(DEFAULT_BASEMAP);
   }
