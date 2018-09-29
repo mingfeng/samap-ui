@@ -30,7 +30,7 @@ export class MapService {
   }
 
   initialize(mapId: string) {
-    this.map = L.map(mapId).setView([60.170126, 24.938742], 15);
+    this.map = L.map(mapId, {attributionControl: false}).setView([60.170126, 24.938742], 15);
     this.map.on('click', (e: L.LeafletMouseEvent) => this.requestServiceArea(e.latlng));
     this.activateBasemap(DEFAULT_BASEMAP);
   }
@@ -57,9 +57,6 @@ export class MapService {
 
   private createBasemap(basemap: string): L.TileLayer {
     return L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom: 18,
       id: basemap,
       accessToken: environment.mapToken
