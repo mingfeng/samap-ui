@@ -15,7 +15,10 @@
       <span>SAMAP</span>
       <span class="content-toolbar-spacer"></span>
       <button type="button" aria-label="Clear map" mat-icon-button (click)="clearMap()">
-        <mat-icon aria-label="Clear map">layers_clear</mat-icon>
+        <mat-icon>layers_clear</mat-icon>
+      </button>
+      <button type="button" aria-label="About" mat-icon-button (click)="openAboutDialog()">
+        <mat-icon>info</mat-icon>
       </button>
     </mat-toolbar>
     <app-map></app-map>

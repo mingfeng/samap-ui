@@ -7,12 +7,12 @@ import {
   MatIconModule,
   MatSidenavModule,
   MatCardModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatDialog
 } from '@angular/material';
 
 import { NavComponent } from './nav.component';
 import { MapService } from '../map.service';
-import { O_TRUNC } from 'constants';
 
 @Component({selector: 'app-map', template: ''})
 class MapStubComponent {}
@@ -44,7 +44,8 @@ describe('NavComponent', () => {
         SettingsStubComponent
       ],
       providers: [
-        { provide: MapService, useValue: mapServiceSpy }
+        { provide: MapService, useValue: mapServiceSpy },
+        { provide: MatDialog, useValue: {}}
       ]
     })
     .compileComponents();

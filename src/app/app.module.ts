@@ -15,7 +15,8 @@ import {
   MatSidenavModule,
   MatListModule,
   MatButtonToggleModule,
-  MatCardModule
+  MatCardModule,
+  MatDialogModule,
 } from '@angular/material';
 import { MccColorPickerModule } from 'material-community-components';
 
@@ -25,6 +26,7 @@ import { HeaderComponent } from './header/header.component';
 import { MapComponent } from './map/map.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NavComponent } from './nav/nav.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -33,10 +35,11 @@ import { NavComponent } from './nav/nav.component';
     HeaderComponent,
     MapComponent,
     SettingsComponent,
-    NavComponent
+    NavComponent,
+    AboutComponent
   ],
   entryComponents: [
-    SettingsComponent
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { NavComponent } from './nav/nav.component';
     MatButtonToggleModule,
     MatCardModule,
     MccColorPickerModule,
+    MatDialogModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
